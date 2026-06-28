@@ -1,0 +1,71 @@
+/* ===========================================================================
+   TIBEB — THEME
+   ---------------------------------------------------------------------------
+   ÉDITE UNIQUEMENT le bloc :root ci-dessous pour retuner tout le site.
+   Les composants n'utilisent JAMAIS ces couleurs brutes : ils passent par les
+   rôles sémantiques (@theme) plus bas. Donc changer un hex ici suffit.
+
+   Palette actuelle : vive, inspirée du drapeau éthiopien (vert / jaune / rouge).
+   Des palettes alternatives sont proposées en commentaire — décommente pour tester.
+=========================================================================== */
+:root {
+  /* —— LES BOUTONS (édite ici) ———————————————————————————————— */
+  --c-red:         #e11d22; /* rouge drapeau — accent principal / CTA */
+  --c-red-deep:    #b0141a;
+  --c-green:       #12a65a; /* vert drapeau — secondaire */
+  --c-green-deep:  #0b7a41;
+  --c-yellow:      #f7c600; /* jaune/or drapeau — highlight + signe ge'ez */
+  --c-yellow-soft: #ffe680;
+  --c-blue:        #0f47af; /* bleu de l'emblème (optionnel) */
+
+  --c-ink:        #241409; /* texte foncé / sections sombres */
+  --c-ink-soft:   #5a4738; /* texte secondaire */
+  --c-bg:         #fdf7ec; /* fond de page (chaud, clair) */
+  --c-bg-deep:    #f6ead2; /* teinte de section alternée */
+  --c-surface:    #fffbf2; /* cartes */
+  --c-cream:      #fff6e6; /* texte/éléments clairs sur fond foncé */
+  --c-cream-deep: #f6ead2;
+}
+
+/* —— Palette alternative « terre + indigo » (décommenter pour essayer) ——
+:root {
+  --c-red: #c8472f; --c-red-deep: #9c3422;
+  --c-green: #3e6b4f; --c-green-deep: #2c4d39;
+  --c-yellow: #e0a92e; --c-yellow-soft: #f2d79a;
+  --c-blue: #274690;
+  --c-ink: #1f1712; --c-ink-soft: #574a40;
+  --c-bg: #f6efe3; --c-bg-deep: #ece0cc; --c-surface: #fdf8ef;
+  --c-cream: #fbf4e7; --c-cream-deep: #ece0cc;
+}
+*/
+
+/* ===========================================================================
+   RÔLES SÉMANTIQUES — utilisés par les composants (bg-primary, text-ink, …).
+   Ne les renomme pas ; mappe-les simplement sur les couleurs brutes ci-dessus.
+=========================================================================== */
+@theme {
+  --color-primary: var(--c-red);
+  --color-primary-deep: var(--c-red-deep);
+  --color-secondary: var(--c-green);
+  --color-secondary-deep: var(--c-green-deep);
+  --color-accent: var(--c-yellow);
+  --color-accent-soft: var(--c-yellow-soft);
+  --color-blue: var(--c-blue);
+
+  --color-ink: var(--c-ink);
+  --color-ink-soft: var(--c-ink-soft);
+  --color-bg: var(--c-bg);
+  --color-bg-deep: var(--c-bg-deep);
+  --color-surface: var(--c-surface);
+  --color-cream: var(--c-cream);
+  --color-cream-deep: var(--c-cream-deep);
+
+  /* Typo (variables injectées par next/font dans le layout) */
+  --font-display: var(--font-bricolage), var(--font-hebrew),
+    var(--font-ethiopic-serif), ui-serif, Georgia, serif;
+  --font-body: var(--font-hanken), var(--font-hebrew),
+    var(--font-ethiopic-serif), ui-sans-serif, system-ui, sans-serif;
+  --font-ethiopic: var(--font-ethiopic-serif), serif;
+
+  --radius-card: 1.25rem;
+}

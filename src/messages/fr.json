@@ -1,0 +1,177 @@
+{
+  "meta": {
+    "title": "Tibeb — Découvrez l'Éthiopie avec un guide local",
+    "description": "Voyages privés et sur mesure à travers l'Éthiopie avec un guide local expérimenté. Églises rupestres, treks sur les hauts plateaux, terres du café et plus encore."
+  },
+  "nav": {
+    "about": "Le guide",
+    "places": "Lieux",
+    "gallery": "Galerie",
+    "calendar": "Disponibilités",
+    "contact": "Contact",
+    "book": "Planifier",
+    "admin": "Admin"
+  },
+  "hero": {
+    "kicker": "Voyages privés accompagnés",
+    "title": "Découvrez l''<eth>Éthiopie</eth> avec quelqu''un qui en a fait sa maison",
+    "subtitle": "Des églises taillées dans la roche de Lalibela aux sommets des monts Simien — des voyages sur mesure, à votre rythme, avec un guide qui connaît le chemin.",
+    "cta": "Voir les disponibilités",
+    "ctaSecondary": "Rencontrer le guide"
+  },
+  "guide": {
+    "eyebrow": "Voici Bocata - Votre guide",
+    "title": "Un conteur pour la route",
+    "bio": "J'accompagne depuis des années des voyageurs à travers l'histoire, les montagnes et les marchés de l'Éthiopie. Je m'occupe de la logistique, de la langue et des rencontres — vous apportez la curiosité. Chaque voyage est construit autour de ce que vous voulez vraiment voir.",
+    "stats": {
+      "experience": "ans de guidage",
+      "tours": "voyages menés",
+      "languages": "langues"
+    },
+    "specialties": {
+      "history": "Histoire & églises",
+      "trekking": "Trek en altitude",
+      "coffee": "Terres du café",
+      "photography": "Itinéraires photo"
+    }
+  },
+  "places": {
+    "eyebrow": "Où aller",
+    "title": "Des lieux qui valent le voyage",
+    "subtitle": "Un point de départ, pas un menu figé. Combinez, ou dites-moi ce que vous avez en tête.",
+    "items": {
+      "lalibela": {
+        "name": "Lalibela",
+        "region": "Amhara",
+        "description": "Onze églises médiévales taillées à même la roche — toujours un lieu vivant de pèlerinage."
+      },
+      "simien": {
+        "name": "Monts Simien",
+        "region": "Nord Gondar",
+        "description": "Escarpements déchiquetés, babouins gélada et l'un des meilleurs treks d'altitude d'Afrique."
+      },
+      "danakil": {
+        "name": "Dépression du Danakil",
+        "region": "Afar",
+        "description": "Champs de soufre, lacs de sel et un lac de lave — l'un des paysages les plus chauds et étranges de la planète."
+      },
+      "omo": {
+        "name": "Vallée de l'Omo",
+        "region": "Sud de l'Éthiopie",
+        "description": "Une rencontre de cultures le long de la rivière, visitée avec respect et de vraies introductions locales."
+      },
+      "gondar": {
+        "name": "Gondar",
+        "region": "Amhara",
+        "description": "Châteaux royaux et églises peintes de la capitale impériale du XVIIe siècle."
+      },
+      "addis": {
+        "name": "Addis-Abeba",
+        "region": "Capitale",
+        "description": "Musées, jazz, marchés et la meilleure culture du café du pays pour commencer ou finir un voyage."
+      }
+    }
+  },
+  "gallery": {
+    "eyebrow": "Sur la route",
+    "title": "Instants en chemin",
+    "subtitle": "Photographies de voyages passés.",
+    "viewAll": "Ouvrir la galerie complète",
+    "back": "Retour à l'accueil"
+  },
+  "booking": {
+    "eyebrow": "Planifiez votre voyage",
+    "title": "Choisissez un jour de départ",
+    "subtitle": "Les jours surlignés sont libres. Choisissez-en un et envoyez une demande — je confirme la disponibilité et je vous recontacte personnellement. Aucun paiement pour demander.",
+    "selectDay": "Choisissez un jour disponible",
+    "selectedDay": "Jour de départ",
+    "noDays": "Aucun jour libre listé pour l'instant — envoyez un message et nous trouverons une date.",
+    "legendAvailable": "Disponible",
+    "form": {
+      "name": "Votre nom",
+      "email": "E-mail",
+      "phone": "Téléphone / WhatsApp (facultatif)",
+      "people": "Nombre de voyageurs",
+      "tourType": "Intéressé par (facultatif)",
+      "tourTypePlaceholder": "ex. Lalibela, trek…",
+      "message": "Quelque chose à me préciser ?",
+      "submit": "Envoyer la demande",
+      "submitting": "Envoi…",
+      "success": "Demande envoyée. Je vous écris très vite par e-mail.",
+      "errorGeneric": "Une erreur est survenue. Réessayez.",
+      "errorDay": "Ce jour vient d'être pris. Choisissez-en un autre.",
+      "pickDayFirst": "Choisissez d'abord un jour ci-dessus."
+    }
+  },
+  "contact": {
+    "eyebrow": "Écrivez-moi",
+    "title": "Des questions ? Contactez-moi",
+    "subtitle": "Heureux de vous aider à construire un itinéraire avant tout engagement.",
+    "whatsapp": "Écrire sur WhatsApp",
+    "email": "Envoyer un e-mail",
+    "responseTime": "Je réponds généralement sous un jour."
+  },
+  "flights": {
+    "open": "Voir les vols vers l'Éthiopie",
+    "title": "Vols vers Addis-Abeba",
+    "subtitle": "Recherche rapide de vols vers l'aéroport de Bole (ADD). On pré-remplit la date que vous avez choisie.",
+    "origin": "Aéroport de départ",
+    "originPlaceholder": "ex. TLV, CDG, JFK",
+    "presets": "Départs fréquents",
+    "date": "Date",
+    "search": "Rechercher sur Google Flights",
+    "note": "S'ouvre sur Google Flights dans un nouvel onglet.",
+    "close": "Fermer"
+  },
+  "footer": {
+    "tagline": "Voyages privés accompagnés à travers l'Éthiopie.",
+    "rights": "Tous droits réservés.",
+    "language": "Langue"
+  },
+  "admin": {
+    "login": {
+      "title": "Connexion guide",
+      "subtitle": "Gérez votre calendrier et vos demandes de voyage.",
+      "email": "E-mail",
+      "password": "Mot de passe",
+      "submit": "Se connecter",
+      "submitting": "Connexion…",
+      "error": "E-mail ou mot de passe incorrect."
+    },
+    "nav": {
+      "dashboard": "Tableau de bord",
+      "site": "Voir le site",
+      "logout": "Se déconnecter"
+    },
+    "calendar": {
+      "title": "Vos disponibilités",
+      "subtitle": "Touchez un jour pour basculer : libre → bloqué → effacé. Les jours réservés sont définis par les voyages confirmés.",
+      "available": "Libre",
+      "unavailable": "Bloqué",
+      "booked": "Réservé",
+      "none": "Non défini"
+    },
+    "bookings": {
+      "title": "Demandes de voyage",
+      "empty": "Aucune demande pour l'instant.",
+      "client": "Client",
+      "contact": "Contact",
+      "date": "Date",
+      "people": "Pers.",
+      "tour": "Intérêt",
+      "status": "Statut",
+      "actions": "Actions",
+      "confirm": "Confirmer",
+      "decline": "Refuser",
+      "complete": "Terminé",
+      "cancel": "Annuler"
+    },
+    "statusLabels": {
+      "PENDING": "En attente",
+      "CONFIRMED": "Confirmé",
+      "DECLINED": "Refusé",
+      "CANCELLED": "Annulé",
+      "COMPLETED": "Terminé"
+    }
+  }
+}

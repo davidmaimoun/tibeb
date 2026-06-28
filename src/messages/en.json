@@ -1,0 +1,177 @@
+{
+  "meta": {
+    "title": "Tibeb — Travel Ethiopia with a local guide",
+    "description": "Private, tailor-made journeys across Ethiopia with an experienced local guide. Rock churches, highland treks, coffee origins and more."
+  },
+  "nav": {
+    "about": "The guide",
+    "places": "Places",
+    "gallery": "Gallery",
+    "calendar": "Availability",
+    "contact": "Contact",
+    "book": "Plan a trip",
+    "admin": "Admin"
+  },
+  "hero": {
+    "kicker": "Private guided journeys",
+    "title": "See <eth>Ethiopia</eth> through the eyes of someone who calls it home",
+    "subtitle": "From the rock-hewn churches of Lalibela to the peaks of the Simien Mountains — tailor-made trips, at your pace, with a guide who knows the way.",
+    "cta": "Check availability",
+    "ctaSecondary": "Meet the guide"
+  },
+  "guide": {
+    "eyebrow": "Meet Bocata - Your guide",
+    "title": "A storyteller for the road",
+    "bio": "I've spent years walking travellers through Ethiopia's history, mountains and markets. I handle the logistics, the language and the introductions — you bring the curiosity. Every trip is built around what you actually want to see.",
+    "stats": {
+      "experience": "years guiding",
+      "tours": "trips led",
+      "languages": "languages"
+    },
+    "specialties": {
+      "history": "History & churches",
+      "trekking": "Highland trekking",
+      "coffee": "Coffee origins",
+      "photography": "Photography routes"
+    }
+  },
+  "places": {
+    "eyebrow": "Where we can go",
+    "title": "Places worth the journey",
+    "subtitle": "A starting point, not a fixed menu. Mix, match, or tell me what you have in mind.",
+    "items": {
+      "lalibela": {
+        "name": "Lalibela",
+        "region": "Amhara",
+        "description": "Eleven medieval churches carved straight down into the rock — still a living place of pilgrimage."
+      },
+      "simien": {
+        "name": "Simien Mountains",
+        "region": "North Gondar",
+        "description": "Jagged escarpments, gelada baboons and some of the best high-altitude trekking in Africa."
+      },
+      "danakil": {
+        "name": "Danakil Depression",
+        "region": "Afar",
+        "description": "Sulphur fields, salt flats and a lava lake — one of the hottest, strangest landscapes on Earth."
+      },
+      "omo": {
+        "name": "Omo Valley",
+        "region": "South Ethiopia",
+        "description": "A meeting of cultures along the river, visited with respect and local introductions."
+      },
+      "gondar": {
+        "name": "Gondar",
+        "region": "Amhara",
+        "description": "Royal castles and painted churches from Ethiopia's 17th-century imperial capital."
+      },
+      "addis": {
+        "name": "Addis Ababa",
+        "region": "Capital",
+        "description": "Museums, jazz, markets and the best coffee culture in the country to begin or end a trip."
+      }
+    }
+  },
+  "gallery": {
+    "eyebrow": "From the road",
+    "title": "Moments along the way",
+    "subtitle": "Photographs from past trips.",
+    "viewAll": "Open full gallery",
+    "back": "Back to home"
+  },
+  "booking": {
+    "eyebrow": "Plan your trip",
+    "title": "Pick a day to start",
+    "subtitle": "Highlighted days are open. Choose one and send a request — I'll confirm availability and follow up personally. No payment needed to ask.",
+    "selectDay": "Select an available day",
+    "selectedDay": "Starting day",
+    "noDays": "No open days listed right now — send a message and we'll find a date.",
+    "legendAvailable": "Available",
+    "form": {
+      "name": "Your name",
+      "email": "Email",
+      "phone": "Phone / WhatsApp (optional)",
+      "people": "Number of travellers",
+      "tourType": "Interested in (optional)",
+      "tourTypePlaceholder": "e.g. Lalibela, trekking…",
+      "message": "Anything you'd like me to know?",
+      "submit": "Send request",
+      "submitting": "Sending…",
+      "success": "Request sent. I'll be in touch by email shortly.",
+      "errorGeneric": "Something went wrong. Please try again.",
+      "errorDay": "That day just filled up. Please pick another.",
+      "pickDayFirst": "Pick a day above to continue."
+    }
+  },
+  "contact": {
+    "eyebrow": "Talk to me",
+    "title": "Questions? Just reach out",
+    "subtitle": "Happy to help you shape an itinerary before you commit to anything.",
+    "whatsapp": "Message on WhatsApp",
+    "email": "Send an email",
+    "responseTime": "I usually reply within a day."
+  },
+  "flights": {
+    "open": "See flights to Ethiopia",
+    "title": "Flights to Addis Ababa",
+    "subtitle": "Quick search for flights to Bole International (ADD). We'll prefill the date you picked.",
+    "origin": "Departure airport",
+    "originPlaceholder": "e.g. TLV, CDG, JFK",
+    "presets": "Common origins",
+    "date": "Date",
+    "search": "Search on Google Flights",
+    "note": "Opens Google Flights in a new tab.",
+    "close": "Close"
+  },
+  "footer": {
+    "tagline": "Private guided journeys across Ethiopia.",
+    "rights": "All rights reserved.",
+    "language": "Language"
+  },
+  "admin": {
+    "login": {
+      "title": "Guide sign-in",
+      "subtitle": "Manage your calendar and trip requests.",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Sign in",
+      "submitting": "Signing in…",
+      "error": "Wrong email or password."
+    },
+    "nav": {
+      "dashboard": "Dashboard",
+      "site": "View site",
+      "logout": "Sign out"
+    },
+    "calendar": {
+      "title": "Your availability",
+      "subtitle": "Tap a day to cycle it: open → blocked → cleared. Booked days are set by confirmed trips.",
+      "available": "Open",
+      "unavailable": "Blocked",
+      "booked": "Booked",
+      "none": "Not set"
+    },
+    "bookings": {
+      "title": "Trip requests",
+      "empty": "No requests yet.",
+      "client": "Client",
+      "contact": "Contact",
+      "date": "Date",
+      "people": "People",
+      "tour": "Interest",
+      "status": "Status",
+      "actions": "Actions",
+      "confirm": "Confirm",
+      "decline": "Decline",
+      "complete": "Mark done",
+      "cancel": "Cancel"
+    },
+    "statusLabels": {
+      "PENDING": "Pending",
+      "CONFIRMED": "Confirmed",
+      "DECLINED": "Declined",
+      "CANCELLED": "Cancelled",
+      "COMPLETED": "Completed"
+    }
+  }
+}
