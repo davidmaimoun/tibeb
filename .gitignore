@@ -8,5 +8,5 @@
 next-env.d.ts
 /prisma/dev.db
 .DS_Store
-venv
+.venv
 raw
