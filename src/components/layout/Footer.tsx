@@ -50,9 +50,20 @@ export function Footer() {
           </div>
         </div>
       </Container>
-      <Container className="border-t border-cream/10 py-5">
+      <Container className="flex flex-col gap-1 border-t border-cream/10 py-5 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-xs text-cream/50">
           © {year} Tibeb. {t("footer.rights")}
+        </p>
+        <p className="text-xs text-cream/50">
+          powered by{" "}
+          <a
+            href="https://www.sudosudev.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold text-secondary underline-offset-4 hover:underline"
+          >
+            sudosu.dev
+          </a>
         </p>
       </Container>
     </footer>

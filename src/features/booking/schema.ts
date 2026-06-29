@@ -6,7 +6,7 @@ export const bookingInputSchema = z.object({
   clientName: z.string().min(2).max(120),
   clientEmail: z.string().email(),
   clientPhone: z.string().max(40).optional().or(z.literal("")),
-  numPeople: z.coerce.number().int().min(1).max(40).default(1),
+  numPeople: z.coerce.number().int().min(2).max(80).default(2),
   tourType: z.string().max(60).optional(),
   message: z.string().max(2000).optional(),
   locale: z.string().min(2).max(5).default("en"),

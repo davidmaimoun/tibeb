@@ -2,6 +2,7 @@
 // taglines) lives under `guide.*` in the message files.
 
 export const guideProfile = {
+  name: "Bocata",
   photo: "/images/guide.jpg", // drop a portrait in public/images/
   yearsExperience: 8,
   toursCompleted: 320,

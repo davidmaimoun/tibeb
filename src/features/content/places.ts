@@ -1,18 +1,25 @@
-// Headline destinations. Each `key` maps to translations under
-// `places.items.<key>.{name,description,region}` AND to a local image at
-// /public/images/places/<key>.jpg. To add one: add an entry here, the matching
-// i18n keys, and drop a photo in public/images/places/.
+// The stops of the 14-day Grand Circuit, in journey order. Each `key` maps to
+// translations under `places.items.<key>.{name,description,region}` and to a
+// local image at /public/images/places/<key>.jpg. `days` ties the stop to the
+// itinerary (see src/features/content/trip.ts).
 
 export type Place = {
   key: string;
   image: string;
-  featured?: boolean;
+  days: string; // day range within the circuit
 };
 
-const keys = ["lalibela", "simien", "danakil", "omo", "gondar", "addis"];
+const entries: { key: string; days: string }[] = [
+  { key: "addis", days: "1 & 14" },
+  { key: "lalibela", days: "2" },
+  { key: "gondar", days: "3" },
+  { key: "simien", days: "4–5" },
+  { key: "omo", days: "6–10" },
+  { key: "danakil", days: "11–13" },
+];
 
-export const places: Place[] = keys.map((key, i) => ({
-  key,
-  image: `/images/places/${key}.jpg`,
-  featured: i < 2,
+export const places: Place[] = entries.map((e) => ({
+  key: e.key,
+  days: e.days,
+  image: `/images/places/${e.key}.jpg`,
 }));

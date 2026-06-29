@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { Menu, X } from "lucide-react";
-import { Link } from "@/i18n/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { LanguageSwitcher } from "@/components/ui/LanguageSwitcher";
 import { ButtonLink } from "@/components/ui/Button";
@@ -19,8 +19,15 @@ const sections = [
 
 export function Header() {
   const t = useTranslations("nav");
+  const locale = useLocale();
+  const pathname = usePathname();
+  const onHome = pathname === "/";
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<string>("");
+
+  // On the home page use in-page anchors (smooth scroll + scroll-spy).
+  // Elsewhere (e.g. the gallery page) link back to the home section.
+  const hrefFor = (id: string) => (onHome ? `#${id}` : `/${locale}/#${id}`);
 
   // Scroll-spy: highlight the nav link for the section in view.
   useEffect(() => {
@@ -56,7 +63,7 @@ export function Header() {
           {sections.map((s) => (
             <a
               key={s.id}
-              href={`#${s.id}`}
+              href={hrefFor(s.id)}
               className={cn(
                 "rounded-lg px-3 py-2 text-sm transition-colors",
                 active === s.id
@@ -71,20 +78,23 @@ export function Header() {
 
         <div className="hidden items-center gap-3 lg:flex">
           <LanguageSwitcher />
-          <ButtonLink href="#calendar" size="sm" className="pulse-soft">
+          <ButtonLink href={hrefFor("calendar")} size="sm" className="pulse-soft">
             {t("book")}
           </ButtonLink>
         </div>
 
-        <button
-          type="button"
-          className="rounded-md p-2 text-ink lg:hidden"
-          aria-expanded={open}
-          aria-label="Menu"
-          onClick={() => setOpen((v) => !v)}
-        >
-          {open ? <X className="size-6" /> : <Menu className="size-6" />}
-        </button>
+        <div className="flex items-center gap-1 lg:hidden">
+          <LanguageSwitcher compact />
+          <button
+            type="button"
+            className="rounded-md p-2 text-ink"
+            aria-expanded={open}
+            aria-label="Menu"
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <X className="size-6" /> : <Menu className="size-6" />}
+          </button>
+        </div>
       </Container>
 
       <div className={cn("lg:hidden", open ? "block" : "hidden")}>
@@ -92,7 +102,7 @@ export function Header() {
           {sections.map((s) => (
             <a
               key={s.id}
-              href={`#${s.id}`}
+              href={hrefFor(s.id)}
               onClick={() => setOpen(false)}
               className={cn(
                 "rounded-lg px-3 py-2.5",
@@ -104,12 +114,14 @@ export function Header() {
               {t(s.key)}
             </a>
           ))}
-          <div className="mt-3 flex items-center justify-between gap-3">
-            <LanguageSwitcher />
-            <ButtonLink href="#calendar" size="sm" onClick={() => setOpen(false)}>
-              {t("book")}
-            </ButtonLink>
-          </div>
+          <ButtonLink
+            href={hrefFor("calendar")}
+            size="sm"
+            className="mt-3"
+            onClick={() => setOpen(false)}
+          >
+            {t("book")}
+          </ButtonLink>
         </Container>
       </div>
     </header>

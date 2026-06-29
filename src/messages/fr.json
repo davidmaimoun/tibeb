@@ -20,8 +20,8 @@
     "ctaSecondary": "Rencontrer le guide"
   },
   "guide": {
-    "eyebrow": "Voici Bocata - Votre guide",
-    "title": "Un conteur pour la route",
+    "eyebrow": "Votre guide",
+    "title": "Voici Bocata",
     "bio": "J'accompagne depuis des années des voyageurs à travers l'histoire, les montagnes et les marchés de l'Éthiopie. Je m'occupe de la logistique, de la langue et des rencontres — vous apportez la curiosité. Chaque voyage est construit autour de ce que vous voulez vraiment voir.",
     "stats": {
       "experience": "ans de guidage",
@@ -38,7 +38,7 @@
   "places": {
     "eyebrow": "Où aller",
     "title": "Des lieux qui valent le voyage",
-    "subtitle": "Un point de départ, pas un menu figé. Combinez, ou dites-moi ce que vous avez en tête.",
+    "subtitle": "Chaque lieu ci-dessous est une étape de notre circuit signature de 14 jours à travers l'Éthiopie — le nord, le Danakil et la vallée de l'Omo.",
     "items": {
       "lalibela": {
         "name": "Lalibela",
@@ -70,7 +70,10 @@
         "region": "Capitale",
         "description": "Musées, jazz, marchés et la meilleure culture du café du pays pour commencer ou finir un voyage."
       }
-    }
+    },
+    "tripBadge": "Le Grand Circuit",
+    "tripDays": "14 jours",
+    "dayLabel": "Jour"
   },
   "gallery": {
     "eyebrow": "Sur la route",
@@ -100,7 +103,13 @@
       "success": "Demande envoyée. Je vous écris très vite par e-mail.",
       "errorGeneric": "Une erreur est survenue. Réessayez.",
       "errorDay": "Ce jour vient d'être pris. Choisissez-en un autre.",
-      "pickDayFirst": "Choisissez d'abord un jour ci-dessus."
+      "pickDayFirst": "Choisissez d'abord un jour ci-dessus.",
+      "tourGeneral": "Demande générale",
+      "byEmail": "Demande par e-mail",
+      "byWhatsapp": "Demande par WhatsApp",
+      "fillRequired": "Ajoutez votre nom et votre e-mail, et choisissez un jour.",
+      "emailSubject": "Demande de voyage — Tibeb",
+      "requestIntro": "Nouvelle demande de voyage"
     }
   },
   "contact": {

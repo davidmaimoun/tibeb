@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { getGalleryImages } from "@/features/content/gallery";
+import { GalleryScroller } from "@/components/sections/GalleryScroller";
 
 export function GalleryStrip() {
   const t = useTranslations("gallery");
@@ -29,24 +30,8 @@ export function GalleryStrip() {
         )}
       </Container>
 
-      {/* Horizontal snap-scroll strip (first ~10 shown here; all on /gallery). */}
-      {images.length > 0 && (
-        <div className="no-scrollbar mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 sm:px-8">
-          {images.slice(0, 10).map((image) => (
-            <Link
-              key={image.id}
-              href="/gallery"
-              className="relative aspect-3/4 w-64 flex-none snap-start overflow-hidden rounded-2xl ring-1 ring-ink/10 sm:w-72"
-            >
-              <div
-                className="h-full w-full bg-cover bg-center transition-transform duration-500 hover:scale-105"
-                style={{ backgroundImage: `url('${image.src}')` }}
-              />
-            </Link>
-          ))}
-          <div className="w-1 flex-none" aria-hidden />
-        </div>
-      )}
+      {/* Horizontal strip with arrows (first ~10 shown; all on /gallery). */}
+      {images.length > 0 && <GalleryScroller images={images.slice(0, 10)} />}
     </section>
   );
 }

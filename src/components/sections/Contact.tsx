@@ -11,10 +11,7 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="relative scroll-mt-24 overflow-hidden py-20 text-cream sm:py-28"
-      style={{
-        backgroundColor: "color-mix(in srgb, var(--c-ink) 92%, var(--c-cream))",
-      }}
+      className="bg-moka relative scroll-mt-24 overflow-hidden py-20 text-cream sm:py-28"
     >
       {/* Faded photo backdrop — swap for one of the guide's images. */}
       <div

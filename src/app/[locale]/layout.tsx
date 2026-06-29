@@ -45,6 +45,14 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://tibeb.example";
+const OG_LOCALE: Record<string, string> = {
+  en: "en_US",
+  fr: "fr_FR",
+  he: "he_IL",
+  am: "am_ET",
+};
+
 export async function generateMetadata({
   params,
 }: {
@@ -52,7 +60,39 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "meta" });
-  return { title: t("title"), description: t("description") };
+
+  const languages = Object.fromEntries(
+    routing.locales.map((l) => [l, `/${l}`]),
+  );
+
+  return {
+    metadataBase: new URL(SITE_URL),
+    title: t("title"),
+    description: t("description"),
+    applicationName: "Tibeb",
+    alternates: {
+      canonical: `/${locale}`,
+      languages: { ...languages, "x-default": "/en" },
+    },
+    openGraph: {
+      type: "website",
+      siteName: "Tibeb",
+      title: t("title"),
+      description: t("description"),
+      url: `/${locale}`,
+      locale: OG_LOCALE[locale] ?? "en_US",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t("title"),
+      description: t("description"),
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: { index: true, follow: true },
+    },
+  };
 }
 
 export default async function LocaleLayout({

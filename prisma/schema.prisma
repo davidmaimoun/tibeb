@@ -40,6 +40,13 @@ model Availability {
   @@index([status])
 }
 
+/// A timeline entry for tracking (icons/timestamps in the UI).
+type TimelineEntry {
+  label String
+  at    DateTime
+  kind  String // "status" | "progress" | "email" | "note"
+}
+
 /// A booking request made by a client.
 model Booking {
   id          String        @id @default(auto()) @map("_id") @db.ObjectId
@@ -48,13 +55,19 @@ model Booking {
   clientName  String
   clientEmail String
   clientPhone String?
-  numPeople   Int           @default(1)
+  numPeople   Int           @default(2)
   tourType    String? // references a place/tour key from content
   message     String?
   locale      String        @default("en") // language the client booked in
   status      BookingStatus @default(PENDING)
 
-  // --- payment fields, unused in the manual flow but ready for automation ---
+  // --- owner workflow / hand-off to guide ---
+  assignedToGuide Boolean         @default(false)
+  progress        String          @default("PENDING") // PENDING | IN_PROCESS | DONE
+  paymentLink     String? // Grow (or other) deposit link pasted by the owner
+  timeline        TimelineEntry[]
+
+  // --- payment fields ---
   amount Float?
   paid   Boolean @default(false)
 

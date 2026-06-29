@@ -1,37 +1,26 @@
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 import { ChevronDown } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { ParallaxBg } from "@/components/ui/ParallaxBg";
 import { ButtonLink } from "@/components/ui/Button";
-import { getGalleryImages } from "@/features/content/gallery";
 import { places } from "@/features/content/places";
 
 // Faded landscape behind everything (reappears in "Where we can go").
 const HERO_BG = "/images/hero.jpg";
-const FALLBACK = "/images/hero-portrait.jpg";
 
 export function Hero() {
   const t = useTranslations("hero");
   const tp = useTranslations("places.items");
-  const locale = useLocale();
 
-  // Use the guide's real photos for the montage (locale-aware: he_* excluded
-  // outside Hebrew). Falls back gracefully before photos are uploaded.
-  const photos = getGalleryImages(locale);
-  const main = photos[0]?.src ?? FALLBACK;
-  const accent = photos[1]?.src ?? photos[0]?.src ?? HERO_BG;
-  const third = photos[2]?.src ?? accent;
+  // Dedicated hero montage photos — drop hero1/2/3.jpg in public/images/.
+  const main = "/images/hero1.jpg";
+  const accent = "/images/hero2.jpg";
+  const third = "/images/hero3.jpg";
 
   const destinations = places.map((p) => tp(`${p.key}.name`)).join(" · ");
 
   return (
-    <section
-      className="relative overflow-hidden text-cream"
-      style={{
-        // Deep highland green — Ethiopia. Dark enough for light text.
-        backgroundColor: "color-mix(in srgb, var(--c-green-deep) 52%, var(--c-ink))",
-      }}
-    >
+    <section className="bg-moka relative overflow-hidden text-cream">
       {/* Parallax photo + flag wash (green / yellow / red) + vignette. */}
       <ParallaxBg src={HERO_BG} opacity={0.18} strength={80} />
       <div
@@ -39,7 +28,7 @@ export function Hero() {
         className="anim-fade-in pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(85% 82% at 6% 2%, color-mix(in srgb, var(--c-green) 30%, transparent), transparent 58%), radial-gradient(80% 78% at 94% 2%, color-mix(in srgb, var(--c-yellow) 22%, transparent), transparent 54%), radial-gradient(80% 85% at 100% 100%, color-mix(in srgb, var(--c-red) 18%, transparent), transparent 60%), radial-gradient(70% 80% at 0% 100%, color-mix(in srgb, var(--c-green) 22%, transparent), transparent 62%)",
+            "radial-gradient(80% 78% at 92% 2%, color-mix(in srgb, var(--c-yellow) 16%, transparent), transparent 55%), radial-gradient(75% 82% at 4% 100%, color-mix(in srgb, var(--c-green) 14%, transparent), transparent 62%)",
         }}
       />
       <div
@@ -115,9 +104,9 @@ export function Hero() {
             className="float-y absolute left-0 top-[4%] w-[72%]"
             style={{ animationDelay: "0s" }}
           >
-            <div className="rotate-[-3deg] overflow-hidden rounded-[1.75rem] ring-1 ring-cream/20 shadow-2xl">
+            <div className="rotate-[-3deg] overflow-hidden rounded-[1.75rem] photo-stack">
               <div
-                className="ken aspect-[3/4] w-full bg-cover bg-center"
+                className="ken photo-pro aspect-[3/4] w-full bg-cover bg-center"
                 style={{ backgroundImage: `url('${main}')` }}
               />
             </div>
@@ -128,9 +117,9 @@ export function Hero() {
             className="float-y absolute end-0 top-[20%] w-[46%]"
             style={{ animationDelay: "1.4s" }}
           >
-            <div className="rotate-[4deg] overflow-hidden rounded-2xl ring-1 ring-cream/20 shadow-2xl">
+            <div className="rotate-[4deg] overflow-hidden rounded-2xl photo-stack">
               <div
-                className="aspect-square w-full bg-cover bg-center"
+                className="photo-pro aspect-square w-full bg-cover bg-center"
                 style={{ backgroundImage: `url('${accent}')` }}
               />
             </div>
@@ -141,9 +130,9 @@ export function Hero() {
             className="float-y absolute bottom-[2%] end-[14%] w-[44%]"
             style={{ animationDelay: "2.6s" }}
           >
-            <div className="rotate-[-1.5deg] overflow-hidden rounded-2xl ring-1 ring-cream/20 shadow-2xl">
+            <div className="rotate-[-1.5deg] overflow-hidden rounded-2xl photo-stack">
               <div
-                className="aspect-[4/3] w-full bg-cover bg-center"
+                className="photo-pro aspect-[4/3] w-full bg-cover bg-center"
                 style={{ backgroundImage: `url('${third}')` }}
               />
             </div>

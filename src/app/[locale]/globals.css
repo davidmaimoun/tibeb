@@ -194,20 +194,7 @@ body {
 /* ---------------------------------------------------------------------------
    Hero "wonder" motion — subtle, cinematic, reduced-motion safe.
 --------------------------------------------------------------------------- */
-/* Shimmer sweep across the flag-colored word. */
-.flag-text {
-  background-size: 220% auto;
-  animation: flag-shimmer 7s ease-in-out infinite;
-}
-@keyframes flag-shimmer {
-  0%,
-  100% {
-    background-position: 0% center;
-  }
-  50% {
-    background-position: 100% center;
-  }
-}
+/* (Flag word is a fixed green/yellow/red gradient — no animation.) */
 
 /* Gentle vertical float for the montage photos. */
 @keyframes float-y {
@@ -253,7 +240,6 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .flag-text,
   .float-y,
   .ken,
   .scroll-cue {
@@ -264,4 +250,29 @@ body {
 /* Legibility for light text over the warm hero — a single soft shadow. */
 .hero-legible {
   text-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Moka → taupe gradient, reused across hero + dark sections.
+   One definition: tweak it here and every moka section follows. */
+@layer components {
+  .bg-moka {
+    background-image: linear-gradient(
+      125deg,
+      color-mix(in srgb, var(--c-ink) 85%, var(--c-cream)) 0%,
+      color-mix(in srgb, var(--c-ink) 70%, var(--c-cream)) 52%,
+      color-mix(in srgb, var(--c-ink) 54%, var(--c-cream)) 100%
+    );
+  }
+}
+
+/* Subtle "pro" grade for the hero montage photos — slightly darker & richer. */
+.photo-pro {
+  filter: brightness(0.88) contrast(1.07) saturate(1.08);
+}
+
+/* Strong drop shadow so the stacked hero photos clearly overlap. */
+.photo-stack {
+  box-shadow:
+    0 18px 40px -8px rgba(0, 0, 0, 0.55),
+    0 6px 14px -3px rgba(0, 0, 0, 0.5);
 }

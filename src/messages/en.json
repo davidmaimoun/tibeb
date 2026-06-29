@@ -20,8 +20,8 @@
     "ctaSecondary": "Meet the guide"
   },
   "guide": {
-    "eyebrow": "Meet Bocata - Your guide",
-    "title": "A storyteller for the road",
+    "eyebrow": "Your guide",
+    "title": "Meet Bocata",
     "bio": "I've spent years walking travellers through Ethiopia's history, mountains and markets. I handle the logistics, the language and the introductions — you bring the curiosity. Every trip is built around what you actually want to see.",
     "stats": {
       "experience": "years guiding",
@@ -38,7 +38,7 @@
   "places": {
     "eyebrow": "Where we can go",
     "title": "Places worth the journey",
-    "subtitle": "A starting point, not a fixed menu. Mix, match, or tell me what you have in mind.",
+    "subtitle": "Every place below is a stop on our signature 14-day journey across Ethiopia — the north, the Danakil, and the Omo Valley.",
     "items": {
       "lalibela": {
         "name": "Lalibela",
@@ -70,7 +70,10 @@
         "region": "Capital",
         "description": "Museums, jazz, markets and the best coffee culture in the country to begin or end a trip."
       }
-    }
+    },
+    "tripBadge": "The Grand Circuit",
+    "tripDays": "14 days",
+    "dayLabel": "Day"
   },
   "gallery": {
     "eyebrow": "From the road",
@@ -100,7 +103,13 @@
       "success": "Request sent. I'll be in touch by email shortly.",
       "errorGeneric": "Something went wrong. Please try again.",
       "errorDay": "That day just filled up. Please pick another.",
-      "pickDayFirst": "Pick a day above to continue."
+      "pickDayFirst": "Pick a day above to continue.",
+      "tourGeneral": "General enquiry",
+      "byEmail": "Request by email",
+      "byWhatsapp": "Request by WhatsApp",
+      "fillRequired": "Please add your name and email, and pick a day.",
+      "emailSubject": "Trip request — Tibeb",
+      "requestIntro": "New trip request"
     }
   },
   "contact": {
