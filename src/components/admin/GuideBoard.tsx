@@ -71,7 +71,9 @@ function GuideCard({
 
   function advance(p: string) {
     onProgress(p);
-    startTransition(() => setProgress(order.id, p));
+    startTransition(() => {
+      void setProgress(order.id, p);
+    });
   }
 
   return (

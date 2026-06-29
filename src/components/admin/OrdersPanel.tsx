@@ -92,12 +92,16 @@ function OrderCard({
 
   function changeStatus(to: Status) {
     onChange({ status: to });
-    startTransition(() => setBookingStatus(order.id, to));
+    startTransition(() => {
+      void setBookingStatus(order.id, to);
+    });
   }
   function toggleGuide() {
     const next = !order.assignedToGuide;
     onChange({ assignedToGuide: next });
-    startTransition(() => assignToGuide(order.id, next));
+    startTransition(() => {
+      void assignToGuide(order.id, next);
+    });
   }
 
   return (

@@ -20,11 +20,11 @@ REPO_URL="https://github.com/davidmaimoun/tibeb.git"   # <-- METS TON REPO GITHU
 APP_PORT="3001"                                    # port interne (portfolio = 3000)
 DB_NAME="tibeb"
 LE_EMAIL="sudosudev.team@gmail.com"                # email pour Let's Encrypt
-
 #############################################################################
-BASE="/home/${APP_USER}"          # reste le "home" pour pm2/.pm2
-REPO_DIR="/var/www/tibeb"         # le code ici
-SHARED="${BASE}/shared"
+
+BASE="/home/${APP_USER}"          # home de l'utilisateur (pm2, .pm2)
+REPO_DIR="/var/www/tibeb"         # le code du site
+SHARED="${BASE}/shared"           # .env + photos persistantes (hors /var/www)
 ENV_FILE="${SHARED}/.env"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
@@ -72,7 +72,10 @@ fi
 # ─────────────────────────────────────────────────────────────────────────
 log "3/9 — Dossiers"
 mkdir -p "$REPO_DIR" "$SHARED/images"
+# /var/www appartient à root : on donne le dossier du site à l'utilisateur tibeb,
+# sinon le git clone / build (qui tournent sous tibeb) échouent en "Permission denied".
 chown -R "${APP_USER}:${APP_USER}" "$BASE"
+chown -R "${APP_USER}:${APP_USER}" "$REPO_DIR"
 
 # ─────────────────────────────────────────────────────────────────────────
 log "4/9 — Récupération du code"
@@ -145,7 +148,16 @@ fi
 
 # ─────────────────────────────────────────────────────────────────────────
 log "7/9 — Build + démarrage de l'app (sous ${APP_USER})"
-sudo -u "$APP_USER" APP_PORT="$APP_PORT" bash "${SCRIPT_DIR}/update_tibeb.sh"
+# deploy.sh est souvent dans /root (inaccessible à tibeb) : on copie le script
+# de mise à jour dans le home de tibeb, qui pourra le lire/l'exécuter.
+if [ -f "${SCRIPT_DIR}/update_tibeb.sh" ]; then
+  cp "${SCRIPT_DIR}/update_tibeb.sh" "${BASE}/update_tibeb.sh"
+  chown "${APP_USER}:${APP_USER}" "${BASE}/update_tibeb.sh"
+  chmod +x "${BASE}/update_tibeb.sh"
+else
+  echo "✗ update_tibeb.sh introuvable à côté de deploy.sh."; exit 1
+fi
+sudo -u "$APP_USER" APP_PORT="$APP_PORT" bash "${BASE}/update_tibeb.sh"
 
 # pm2 au démarrage de la machine, pour l'utilisateur tibeb
 env PATH="$PATH" pm2 startup systemd -u "$APP_USER" --hp "$BASE" >/dev/null || true
@@ -153,8 +165,7 @@ sudo -u "$APP_USER" pm2 save >/dev/null || true
 
 # ─────────────────────────────────────────────────────────────────────────
 log "8/9 — nginx (bloc dédié, sans toucher aux autres sites)"
-NGINX_SITE="/etc/nginx/sites-available/${DOMAIN}"
-cat > "$NGINX_SITE" <<EOF
+read -r -d '' NGINX_CONF <<EOF || true
 server {
     listen 80;
     listen [::]:80;
@@ -175,7 +186,17 @@ server {
     }
 }
 EOF
-ln -sfn "$NGINX_SITE" "/etc/nginx/sites-enabled/${DOMAIN}"
+
+if [ -d /etc/nginx/sites-available ]; then
+  # Convention Debian/Ubuntu : sites-available + sites-enabled
+  echo "$NGINX_CONF" > "/etc/nginx/sites-available/${DOMAIN}"
+  ln -sfn "/etc/nginx/sites-available/${DOMAIN}" "/etc/nginx/sites-enabled/${DOMAIN}"
+  echo "Config écrite dans sites-available/${DOMAIN}"
+else
+  # Convention conf.d
+  echo "$NGINX_CONF" > "/etc/nginx/conf.d/${DOMAIN}.conf"
+  echo "Config écrite dans conf.d/${DOMAIN}.conf"
+fi
 nginx -t && systemctl reload nginx
 echo "Bloc nginx pour ${DOMAIN} activé."
 
@@ -201,7 +222,7 @@ Prochaines étapes :
   3) Crée ton compte admin (1 fois) :
        sudo -u ${APP_USER} bash -c 'cd ${REPO_DIR} && set -a && . ${ENV_FILE} && set +a \\
          && SEED_ADMIN_EMAIL="toi@mail.com" SEED_ADMIN_PASSWORD="motdepasse" npm run seed'
-  4) Relance une mise à jour :    sudo -u ${APP_USER} APP_PORT=${APP_PORT} bash ${SCRIPT_DIR}/update_tibeb.sh
+  4) Relance une mise à jour :    sudo -u ${APP_USER} APP_PORT=${APP_PORT} bash ${BASE}/update_tibeb.sh
 
 Logs en direct :  sudo -u ${APP_USER} pm2 logs tibeb
 EOF
