@@ -10,6 +10,8 @@ const credentialsSchema = z.object({
 });
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  // Derrière un reverse proxy (nginx) + Cloudflare : faire confiance au host.
+  trustHost: true,
   session: { strategy: "jwt" },
   pages: {
     // Locale prefix is added at link time; this is the fallback path.
