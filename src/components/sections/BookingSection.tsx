@@ -7,7 +7,7 @@ import { fr, he, enUS } from "react-day-picker/locale";
 import { Plane, Send, Check } from "lucide-react";
 import { Section, SectionHeader } from "@/components/ui/Section";
 import { FlightsPanel } from "@/components/sections/FlightsPanel";
-import { places } from "@/features/content/places";
+import { TRIPS, getTrip, DEFAULT_TRIP_CODE } from "@/features/content/trip";
 import { getDirection } from "@/i18n/config";
 import { isoDay } from "@/lib/utils";
 import {
@@ -26,17 +26,12 @@ const OWNER_WA = (
   ""
 ).replace(/[^\d]/g, "");
 
-export function BookingSection({ availableDays }: { availableDays: string[] }) {
+export function BookingSection() {
   const t = useTranslations("booking");
   const tf = useTranslations("flights");
-  const tPlaces = useTranslations("places.items");
   const locale = useLocale();
   const dir = getDirection(locale);
 
-  const availableDates = useMemo(
-    () => availableDays.map((d) => new Date(`${d}T00:00:00Z`)),
-    [availableDays],
-  );
   const todayStart = useMemo(() => {
     const d = new Date();
     d.setHours(0, 0, 0, 0);
@@ -74,9 +69,8 @@ export function BookingSection({ availableDays }: { availableDays: string[] }) {
     setWaError(false);
     const phone = String(fd.get("clientPhone") ?? "").trim();
     const people = String(fd.get("numPeople") ?? "1");
-    const tourVal = String(fd.get("tourType") ?? "general");
-    const tour =
-      tourVal === "general" ? t("form.tourGeneral") : tPlaces(`${tourVal}.name`);
+    const tourVal = String(fd.get("tourType") ?? DEFAULT_TRIP_CODE);
+    const tour = getTrip(tourVal).title;
     const msg = String(fd.get("message") ?? "").trim();
 
     const body = [
@@ -118,14 +112,8 @@ export function BookingSection({ availableDays }: { availableDays: string[] }) {
             selected={selected}
             onSelect={setSelected}
             disabled={{ before: todayStart }}
-            modifiers={{ available: availableDates }}
-            modifiersClassNames={{ available: "font-semibold text-secondary" }}
             startMonth={new Date()}
           />
-          <div className="mt-4 flex items-center gap-2 text-sm text-ink-soft/70">
-            <span className="inline-block h-3 w-3 rounded-full bg-secondary" />
-            {t("legendAvailable")}
-          </div>
 
           <button
             type="button"
@@ -205,13 +193,12 @@ export function BookingSection({ availableDays }: { availableDays: string[] }) {
                 </span>
                 <select
                   name="tourType"
-                  defaultValue="general"
+                  defaultValue={DEFAULT_TRIP_CODE}
                   className="rounded-xl border border-ink/15 bg-surface px-3.5 py-2.5 text-ink outline-none focus:border-primary"
                 >
-                  <option value="general">{t("form.tourGeneral")}</option>
-                  {places.map((p) => (
-                    <option key={p.key} value={p.key}>
-                      {tPlaces(`${p.key}.name`)}
+                  {TRIPS.map((trip) => (
+                    <option key={trip.code} value={trip.code}>
+                      {trip.title}
                     </option>
                   ))}
                 </select>
