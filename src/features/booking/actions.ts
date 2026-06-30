@@ -159,6 +159,15 @@ export async function updateBookingDate(
   return { ok: true };
 }
 
+/** ADMIN — permanently delete a booking. */
+export async function deleteBooking(id: string): Promise<ActionResult> {
+  const session = await auth();
+  if (!session?.user) return { ok: false, error: "unauthorized" };
+  await prisma.booking.delete({ where: { id } });
+  revalidatePath("/[locale]/admin", "page");
+  return { ok: true };
+}
+
 /** ADMIN — list bookings, newest first. */
 export async function listBookings() {
   const session = await auth();

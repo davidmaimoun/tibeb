@@ -43,6 +43,7 @@ export default async function AdminDashboard({
     assignedToGuide: b.assignedToGuide,
     progress: b.progress,
     paymentLink: b.paymentLink,
+    createdAt: b.createdAt.toISOString(),
   }));
 
   return (

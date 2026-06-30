@@ -2,12 +2,13 @@
 
 import { useMemo, useState, useTransition } from "react";
 import { useLocale } from "next-intl";
-import { Mail, Send, UserCheck, UserPlus, Eye, Check, CalendarClock, Copy } from "lucide-react";
+import { Mail, Send, UserCheck, UserPlus, Eye, Check, CalendarClock, Copy, Trash2 } from "lucide-react";
 import {
   setBookingStatus,
   assignToGuide,
   sendClientEmail,
   updateBookingDate,
+  deleteBooking,
 } from "@/features/booking/actions";
 import {
   confirmAvailableEmail,
@@ -34,6 +35,7 @@ export type OrderRow = {
   assignedToGuide: boolean;
   progress: string;
   paymentLink: string | null;
+  createdAt: string;
 };
 
 const statusStyles: Record<Status, string> = {
@@ -62,6 +64,7 @@ export function OrdersPanel({ rows }: { rows: OrderRow[] }) {
           onChange={(patch) =>
             setItems((prev) => prev.map((x) => (x.id === b.id ? { ...x, ...patch } : x)))
           }
+          onDelete={() => setItems((prev) => prev.filter((x) => x.id !== b.id))}
         />
       ))}
     </ul>
@@ -71,9 +74,11 @@ export function OrdersPanel({ rows }: { rows: OrderRow[] }) {
 function OrderCard({
   order,
   onChange,
+  onDelete,
 }: {
   order: OrderRow;
   onChange: (patch: Partial<OrderRow>) => void;
+  onDelete: () => void;
 }) {
   const locale = useLocale();
   const [pending, startTransition] = useTransition();
@@ -90,6 +95,19 @@ function OrderCard({
     [order.startDate, locale],
   );
   const quote = priceFor(getTrip(order.tourType), order.numPeople);
+  const myShare = Math.round(quote.total * 0.1);
+  const guideShare = quote.total - myShare;
+
+  const receivedStr = useMemo(
+    () =>
+      new Date(order.createdAt).toLocaleString(locale, {
+        day: "numeric",
+        month: "short",
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
+    [order.createdAt, locale],
+  );
 
   function changeStatus(to: Status) {
     onChange({ status: to });
@@ -111,6 +129,13 @@ function OrderCard({
       void updateBookingDate(order.id, day);
     });
   }
+  function remove() {
+    if (!window.confirm("Delete this request permanently?")) return;
+    onDelete();
+    startTransition(() => {
+      void deleteBooking(order.id);
+    });
+  }
 
   return (
     <li className="rounded-[var(--radius-card)] bg-surface p-5 ring-1 ring-ink/10">
@@ -127,10 +152,23 @@ function OrderCard({
             {order.clientPhone ? ` · ${order.clientPhone}` : ""}
           </p>
         </div>
-        <span className={cn("rounded-full px-3 py-1 text-xs font-semibold", statusStyles[order.status])}>
-          {order.status}
-        </span>
+        <div className="flex items-center gap-2">
+          <span className={cn("rounded-full px-3 py-1 text-xs font-semibold", statusStyles[order.status])}>
+            {order.status}
+          </span>
+          <button
+            type="button"
+            onClick={remove}
+            aria-label="Delete request"
+            title="Delete request"
+            className="rounded-md p-1.5 text-ink-soft/50 transition-colors hover:bg-primary/10 hover:text-primary"
+          >
+            <Trash2 className="size-4" />
+          </button>
+        </div>
       </div>
+
+      <p className="mt-1 text-xs text-ink-soft/50">Received {receivedStr}</p>
 
       <div className="mt-3 flex flex-wrap items-center gap-x-6 gap-y-1 text-sm text-ink-soft/80">
         <label className="inline-flex items-center gap-2">
@@ -147,9 +185,21 @@ function OrderCard({
           <span className="text-ink-soft/50">Travellers: </span>
           {order.numPeople}
         </span>
-        <span>
-          <span className="text-ink-soft/50">Quote: </span>
-          {usd(quote.total)} · deposit {usd(quote.deposit)}
+      </div>
+
+      {/* Financial split: total, my 10% share, guide's rest, deposit */}
+      <div className="mt-3 flex flex-wrap items-center gap-2 text-xs font-semibold">
+        <span className="rounded-full bg-ink/8 px-3 py-1 text-ink">
+          Total · {usd(quote.total)}
+        </span>
+        <span className="rounded-full bg-accent/25 px-3 py-1 text-ink">
+          My share 10% · {usd(myShare)}
+        </span>
+        <span className="rounded-full bg-secondary/15 px-3 py-1 text-secondary">
+          Guide · {usd(guideShare)}
+        </span>
+        <span className="rounded-full bg-primary/10 px-3 py-1 text-primary-deep">
+          Deposit · {usd(quote.deposit)}
         </span>
       </div>
 
