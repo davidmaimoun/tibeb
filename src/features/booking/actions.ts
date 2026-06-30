@@ -134,6 +134,31 @@ export async function setBookingStatus(
   return { ok: true };
 }
 
+/** ADMIN — change a booking's date (when the conversation moves it via mail/WhatsApp). */
+export async function updateBookingDate(
+  id: string,
+  startDate: string,
+): Promise<ActionResult> {
+  const session = await auth();
+  if (!session?.user) return { ok: false, error: "unauthorized" };
+
+  if (!startDate) return { ok: false, error: "invalid_input" };
+  const day = toUtcDay(new Date(startDate));
+
+  await prisma.booking.update({
+    where: { id },
+    data: {
+      startDate: day,
+      timeline: {
+        push: { label: `Date → ${startDate}`, at: new Date(), kind: "status" },
+      },
+    },
+  });
+
+  revalidatePath("/[locale]/admin", "page");
+  return { ok: true };
+}
+
 /** ADMIN — list bookings, newest first. */
 export async function listBookings() {
   const session = await auth();

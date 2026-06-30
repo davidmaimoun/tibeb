@@ -7,6 +7,7 @@ import {
   setBookingStatus,
   assignToGuide,
   sendClientEmail,
+  updateBookingDate,
 } from "@/features/booking/actions";
 import {
   confirmAvailableEmail,
@@ -103,6 +104,13 @@ function OrderCard({
       void assignToGuide(order.id, next);
     });
   }
+  function changeDate(day: string) {
+    if (!day) return;
+    onChange({ startDate: day });
+    startTransition(() => {
+      void updateBookingDate(order.id, day);
+    });
+  }
 
   return (
     <li className="rounded-[var(--radius-card)] bg-surface p-5 ring-1 ring-ink/10">
@@ -124,11 +132,17 @@ function OrderCard({
         </span>
       </div>
 
-      <div className="mt-3 flex flex-wrap gap-x-6 gap-y-1 text-sm text-ink-soft/80">
-        <span>
-          <span className="text-ink-soft/50">Date: </span>
-          {dateStr}
-        </span>
+      <div className="mt-3 flex flex-wrap items-center gap-x-6 gap-y-1 text-sm text-ink-soft/80">
+        <label className="inline-flex items-center gap-2">
+          <span className="text-ink-soft/50">Date:</span>
+          <input
+            type="date"
+            value={order.startDate.slice(0, 10)}
+            onChange={(e) => changeDate(e.target.value)}
+            className="rounded-md border border-ink/15 bg-surface px-2 py-1 text-ink outline-none focus:border-primary"
+            title={dateStr}
+          />
+        </label>
         <span>
           <span className="text-ink-soft/50">Travellers: </span>
           {order.numPeople}

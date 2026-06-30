@@ -72,11 +72,18 @@ function pricingHtml(trip: Trip, people: number): string {
   </p>`;
 }
 
+function normalizeUrl(link: string): string {
+  const t = link.trim();
+  if (!t) return "";
+  return /^https?:\/\//i.test(t) ? t : `https://${t}`;
+}
+
 function payButton(link: string): string {
   if (!link) return "";
+  const url = normalizeUrl(link);
   return `
   <div style="text-align:center;margin:18px 0 6px">
-    <a href="${escapeAttr(link)}" style="display:inline-block;background:${GREEN};color:#fff;text-decoration:none;padding:14px 28px;border-radius:9999px;font-weight:700;font-size:15px">Pay the deposit securely →</a>
+    <a href="${escapeAttr(url)}" style="display:inline-block;background:${GREEN};color:#fff;text-decoration:none;padding:14px 28px;border-radius:9999px;font-weight:700;font-size:15px">Pay the deposit securely →</a>
   </div>`;
 }
 
@@ -176,7 +183,7 @@ export function confirmAvailableText(i: ConfirmInput): string {
     pricingText(i.trip, i.numPeople),
     "",
     i.paymentLink
-      ? `To secure your dates, pay the ${priceFor(i.trip, i.numPeople).depositPct}% deposit here:\n${i.paymentLink}`
+      ? `To secure your dates, pay the ${priceFor(i.trip, i.numPeople).depositPct}% deposit here:\n${normalizeUrl(i.paymentLink)}`
       : "I'll send you the secure deposit link to confirm.",
     `The remaining balance is paid in cash on arrival (it covers local guides, fees and on-site activities).`,
     "",
