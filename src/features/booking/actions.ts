@@ -15,7 +15,6 @@ import {
   bookingStatusSchema,
   type ActionResult,
 } from "./schema";
-import { DayStatus } from "@prisma/client";
 
 /**
  * PUBLIC — a client submits a booking request.
@@ -41,13 +40,8 @@ export async function createBooking(
     return { ok: false, error: "day_unavailable" };
   }
 
-  // Manual request flow: any future day can be REQUESTED. Only block days the
-  // guide explicitly marked UNAVAILABLE or that are already BOOKED. A day with
-  // no record yet is fine — the guide confirms availability afterwards.
-  const day = await prisma.availability.findUnique({ where: { date: startDate } });
-  if (day && day.status !== DayStatus.AVAILABLE) {
-    return { ok: false, error: "day_unavailable" };
-  }
+  // Calendar is free: any future day can be requested (the guide may run several
+  // groups on the same date). Availability is no longer used to block requests.
 
   const booking = await prisma.booking.create({
     data: {
@@ -115,7 +109,7 @@ export async function requestBooking(
   return { status: "success" };
 }
 
-/** ADMIN — change a booking status. Optionally flips the day's availability. */
+/** ADMIN — change a booking status. */
 export async function setBookingStatus(
   id: string,
   status: unknown,
@@ -135,19 +129,6 @@ export async function setBookingStatus(
       },
     },
   });
-
-  // Keep the calendar in sync: confirming books the day, declining frees it.
-  if (parsed.data === "CONFIRMED") {
-    await prisma.availability.updateMany({
-      where: { date: booking.startDate },
-      data: { status: DayStatus.BOOKED },
-    });
-  } else if (parsed.data === "DECLINED" || parsed.data === "CANCELLED") {
-    await prisma.availability.updateMany({
-      where: { date: booking.startDate, status: DayStatus.BOOKED },
-      data: { status: DayStatus.AVAILABLE },
-    });
-  }
 
   revalidatePath("/[locale]/admin", "page");
   return { ok: true };
