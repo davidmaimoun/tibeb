@@ -84,7 +84,7 @@ export function Header() {
         </div>
 
         <div className="flex items-center gap-1 lg:hidden">
-          <LanguageSwitcher compact />
+          <LanguageSwitcher />
           <button
             type="button"
             className="rounded-md p-2 text-ink"

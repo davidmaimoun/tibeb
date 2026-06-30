@@ -19,3 +19,11 @@ export const localeLabels: Record<Locale, string> = {
   am: "አማርኛ",
   fr: "Français",
 };
+
+// Métadonnées d'affichage pour le sélecteur de langue (drapeau + libellé natif).
+export const localeMeta: Record<Locale, { label: string; flag: string }> = {
+  he: { label: "עברית", flag: "🇮🇱" },
+  en: { label: "English", flag: "🇬🇧" },
+  am: { label: "አማርኛ", flag: "🇪🇹" },
+  fr: { label: "Français", flag: "🇫🇷" },
+};
