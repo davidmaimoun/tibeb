@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
+import { GuidePhoto } from "@/components/ui/GuidePhoto";
 import { guideProfile } from "@/features/content/guide";
 import { localeLabels } from "@/i18n/config";
 
@@ -46,21 +47,19 @@ export function GuideIntro() {
     <Section
       id="guide"
       className="bg-surface"
-      bgImage="/images/texture/guide.jpg"
+      bgImage=""
     >
       <div className="grid items-center gap-12 lg:grid-cols-[0.85fr_1.15fr]">
         <Reveal className="relative mx-auto w-full max-w-sm">
-          <div className="aspect-4/5 overflow-hidden rounded-4xl ring-1 ring-ink/10 shadow-xl">
-            <div
-              className="h-full w-full bg-cover bg-center"
-              style={{
-                backgroundImage: `url('${guideProfile.photo}')`,
-              }}
-            />
-          </div>
+          <GuidePhoto
+            src={guideProfile.photo}
+            alt={guideProfile.name ?? "Guide"}
+            shape="pebble"
+            className="w-full drop-shadow-xl"
+          />
           <span
             aria-hidden
-            className="geez-mark absolute -bottom-6 end-[-4%] text-7xl opacity-20"
+            className="geez-mark absolute -bottom-6 end-[12%] text-7xl opacity-20"
           >
             መሪ
           </span>

@@ -18,7 +18,7 @@ export function Contact() {
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-[0.08]"
         style={{
-          backgroundImage: "url('/images/texture/contact.jpg')",
+          backgroundImage: "url('/images/places/danakil.jpg')",
         }}
       />
 

@@ -12,7 +12,7 @@ export function Places() {
       id="places"
       parallax
       className="bg-moka text-cream"
-      bgImage="/images/hero.jpg"
+      bgImage="/images/hero3.jpg"
     >
       {/* Pretty marker: this is the signature 14-day circuit */}
       <div className="mb-5 inline-flex items-center gap-2.5 rounded-full bg-accent/15 px-4 py-1.5 text-sm font-semibold text-accent-soft ring-1 ring-accent/30">
